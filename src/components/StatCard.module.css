@@ -1,0 +1,92 @@
+.card {
+  padding: 0;
+  animation: fadeUp 0.4s ease forwards;
+  cursor: default;
+}
+
+/* Thin accent bar across the top */
+.topStrip {
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .topStrip { opacity: 1; }
+
+/* Main content row */
+.inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+/* Icon bubble */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.card:hover .iconWrap {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.icon {
+  font-size: 21px;
+  line-height: 1;
+  animation: float 4s ease-in-out infinite;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+/* key= on the wrapper re-triggers this animation when value changes */
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  animation: numberReveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.unit {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  padding-bottom: 2px;
+}
+
+.sub {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}

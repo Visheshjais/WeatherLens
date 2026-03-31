@@ -1,0 +1,77 @@
+.wrapper {
+  padding: 20px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.unitBadge {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: rgba(99, 179, 237, 0.1);
+  border: 1px solid var(--border-accent);
+  border-radius: 99px;
+  color: var(--accent-blue);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.hint {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.scrollContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-accent) transparent;
+  padding-bottom: 4px;
+}
+
+.tooltip {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.tooltipLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.tooltipValue {
+  font-size: 12px;
+}
+
+.tooltipUnit {
+  font-size: 10px;
+  opacity: 0.7;
+}

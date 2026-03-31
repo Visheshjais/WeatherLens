@@ -1,0 +1,341 @@
+/* =============================================
+   WeatherLens – Global Design System
+   ─────────────────────────────────
+   Theme strategy:
+     • CSS custom properties (variables) drive ALL colours
+     • Dark theme is the default on :root
+     • Light theme overrides on [data-theme="light"]
+     • ThemeContext.jsx sets data-theme on <html>
+     • One toggle → entire app re-colours instantly
+
+   Fonts: Syne (display headings) + DM Sans (body text)
+   ============================================= */
+
+/* ══════════════════════════════════════════
+   DARK THEME  (default)
+   ══════════════════════════════════════════ */
+:root {
+  /* Backgrounds – layered depth */
+  --bg-base:       #07090f;   /* page background */
+  --bg-nav:        rgba(10, 14, 22, 0.88); /* navbar (semi-transparent) */
+  --bg-panel:      #0f1623;   /* secondary panels */
+  --bg-card:       #131c2e;   /* cards */
+  --bg-card-hover: #1a2540;   /* card on hover */
+  --bg-input:      #0f1623;   /* input fields */
+
+  /* Borders */
+  --border:        rgba(99, 179, 237, 0.10);
+  --border-accent: rgba(99, 179, 237, 0.30);
+  --border-input:  rgba(99, 179, 237, 0.25);
+
+  /* Accent palette – same in both themes */
+  --accent-blue:   #63b3ed;
+  --accent-cyan:   #4fd1c5;
+  --accent-amber:  #f6ad55;
+  --accent-rose:   #fc8181;
+  --accent-violet: #b794f4;
+  --accent-green:  #68d391;
+
+  /* Text */
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #3d4f6b;
+  --text-inverse:   #07090f;  /* text on accent buttons */
+
+  /* Shadows */
+  --shadow-card:       0 4px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow-blue:  0 0 28px rgba(99, 179, 237, 0.18);
+  --shadow-input:      0 0 0 3px rgba(99, 179, 237, 0.12);
+
+  /* Dropdown */
+  --bg-dropdown:     #131c2e;
+  --border-dropdown: rgba(99, 179, 237, 0.30);
+  --bg-dropdown-item-hover: rgba(99, 179, 237, 0.10);
+
+  /* Theme toggle button */
+  --theme-btn-bg:     rgba(99, 179, 237, 0.10);
+  --theme-btn-border: rgba(99, 179, 237, 0.30);
+  --theme-btn-color:  #63b3ed;
+
+  /* Fonts */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Border radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  /* Transitions */
+  --transition:      all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ══════════════════════════════════════════
+   LIGHT THEME  — overrides only what changes
+   ══════════════════════════════════════════ */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-base:       #f0f4f8;
+  --bg-nav:        rgba(255, 255, 255, 0.92);
+  --bg-panel:      #e2e8f0;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f7fafc;
+  --bg-input:      #ffffff;
+
+  /* Borders */
+  --border:        rgba(45, 116, 179, 0.14);
+  --border-accent: rgba(45, 116, 179, 0.35);
+  --border-input:  rgba(45, 116, 179, 0.30);
+
+  /* Accent colours – slightly deeper for light bg contrast */
+  --accent-blue:   #2b6cb0;
+  --accent-cyan:   #2c7a7b;
+  --accent-amber:  #c05621;
+  --accent-rose:   #c53030;
+  --accent-violet: #6b46c1;
+  --accent-green:  #276749;
+
+  /* Text */
+  --text-primary:   #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted:     #a0aec0;
+  --text-inverse:   #ffffff;
+
+  /* Shadows – softer on white */
+  --shadow-card:      0 2px 16px rgba(0, 0, 0, 0.10);
+  --shadow-glow-blue: 0 0 20px rgba(43, 108, 176, 0.15);
+  --shadow-input:     0 0 0 3px rgba(43, 108, 176, 0.15);
+
+  /* Dropdown */
+  --bg-dropdown:              #ffffff;
+  --border-dropdown:          rgba(45, 116, 179, 0.25);
+  --bg-dropdown-item-hover:   rgba(43, 108, 176, 0.08);
+
+  /* Theme toggle button */
+  --theme-btn-bg:     rgba(43, 108, 176, 0.10);
+  --theme-btn-border: rgba(43, 108, 176, 0.30);
+  --theme-btn-color:  #2b6cb0;
+}
+
+/* ══════════════════════════════════════════
+   SMOOTH THEME TRANSITION
+   All colour changes animate over 300ms
+   ══════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Animate theme colour transitions globally */
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+              color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Override: don't animate layout/transform properties */
+*:not([class*="spinner"]):not([class*="ring"]) {
+  transition-property: background-color, border-color, color, box-shadow, opacity, transform;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  /* Layered ambient glow — adapts via opacity in light mode */
+  background-image:
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(99,179,237,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 90% 80%,  rgba(79,209,197,0.04) 0%, transparent 55%);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ══════════════════════════════════════════
+   REUSABLE CARD COMPONENT
+   ══════════════════════════════════════════ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer line at top on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow-blue);
+  transform: translateY(-2px);
+}
+
+.card:hover::before { opacity: 0.6; }
+
+/* ══════════════════════════════════════════
+   REUSABLE BUTTON
+   ══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-accent);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgba(99,179,237,0.10);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  transform: translateY(-1px);
+}
+
+.btn:active { transform: translateY(0); }
+
+/* ══════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ══════════════════════════════════════════ */
+
+/* Fade up + in — used for page/section entrance */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Plain fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Springy scale in — used for stat values & pills */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Number reveal with bounce — re-triggers on value change */
+@keyframes numberReveal {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.90); }
+  60%  { opacity: 1; transform: translateY(-2px) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Rotating spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Soft pulse glow on location badge */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(99,179,237,0); }
+  50%       { box-shadow: 0 0 12px 3px rgba(99,179,237,0.22); }
+}
+
+/* Gentle float — used on stat card icons */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* Shimmer — skeleton loading */
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position:  400px 0; }
+}
+
+/* Theme toggle knob slide */
+@keyframes knobSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(22px); }
+}
+
+/* ── Stagger utility (apply to children for cascade entrance) ── */
+.stagger-1 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.05s; }
+.stagger-2 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.10s; }
+.stagger-3 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.15s; }
+.stagger-4 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.20s; }
+.stagger-5 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.25s; }
+.stagger-6 { opacity: 0; animation: fadeUp 0.4s ease forwards 0.30s; }
+
+/* ── Skeleton shimmer placeholder ── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-card) 25%,
+    rgba(99,179,237,0.06) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ══════════════════════════════════════════
+   REACT-DATEPICKER THEME OVERRIDES
+   Both dark and light handled via CSS vars
+   ══════════════════════════════════════════ */
+.react-datepicker {
+  background:   var(--bg-card)     !important;
+  border:       1px solid var(--border-accent) !important;
+  border-radius: var(--radius-md)  !important;
+  font-family:  var(--font-body)   !important;
+  box-shadow:   0 8px 40px rgba(0,0,0,0.25) !important;
+  color:        var(--text-primary) !important;
+}
+.react-datepicker__header {
+  background:   var(--bg-panel)  !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: var(--text-primary) !important;
+}
+.react-datepicker__navigation-icon::before {
+  border-color: var(--text-secondary) !important;
+}
+.react-datepicker__day {
+  color: var(--text-secondary) !important;
+  border-radius: 6px !important;
+}
+.react-datepicker__day:hover {
+  background: rgba(99,179,237,0.18) !important;
+  color:      var(--accent-blue)    !important;
+}
+.react-datepicker__day--selected {
+  background: var(--accent-blue) !important;
+  color:      var(--text-inverse) !important;
+}
+.react-datepicker__day--keyboard-selected {
+  background: rgba(99,179,237,0.25) !important;
+}
+.react-datepicker__day--outside-month { color: var(--text-muted) !important; }
+.react-datepicker__triangle { display: none !important; }

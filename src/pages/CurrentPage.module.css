@@ -1,0 +1,388 @@
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  animation: fadeUp 0.4s ease forwards;
+}
+
+/* ── Hero Banner ── */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+/* Ambient glow behind hero */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(99,179,237,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Greeting line: "Good Morning, here's weather for Delhi" */
+.heroGreeting {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.heroWave {
+  font-size: 18px;
+  /* Wave animation on the hand emoji */
+  display: inline-block;
+  animation: wave 2.2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0%,100% { transform: rotate(0deg); }
+  20%      { transform: rotate(20deg); }
+  40%      { transform: rotate(-5deg); }
+  60%      { transform: rotate(15deg); }
+  80%      { transform: rotate(-3deg); }
+}
+
+/* City name highlighted in the greeting */
+.heroLocation {
+  font-weight: 700;
+  color: var(--accent-blue);
+  font-family: var(--font-display);
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heroTemp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.heroTempBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroTempLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.heroTempRow {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.heroTempDivider {
+  font-size: 40px;
+  color: var(--text-muted);
+  font-weight: 200;
+  align-self: center;
+  padding: 0 4px;
+  margin-top: 14px;
+}
+
+.heroTempValue {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 68px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  animation: numberReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.heroTempUnit {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  margin-left: 3px;
+}
+
+.heroMeta {
+  padding-bottom: 8px;
+}
+
+.heroDate {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.heroRange {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.heroDivider {
+  color: var(--text-muted);
+}
+
+.heroRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+/* AQI pill */
+.aqiPill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 20px;
+  border: 2px solid;
+  border-radius: var(--radius-md);
+  background: rgba(0,0,0,0.2);
+  min-width: 90px;
+  animation: scaleIn 0.5s ease forwards 0.2s;
+  opacity: 0;
+}
+
+.aqiLabel {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.aqiValue {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.aqiLevel {
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* UV pill */
+.uvPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.2);
+  animation: scaleIn 0.5s ease forwards 0.3s;
+  opacity: 0;
+}
+
+.uvLevel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* ── Page Header ── */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.pageSubtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ── Controls row ── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Temperature unit toggle */
+.unitToggle {
+  display: flex;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.unitBtn {
+  padding: 7px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.unitBtn:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+.unitActive {
+  background: var(--accent-blue) !important;
+  color: #0a0e14 !important;
+}
+
+/* Date picker wrapper */
+.datepickerWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.calIcon { font-size: 14px; }
+
+.datepicker {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  width: 110px;
+}
+
+/* Section title hint text — e.g. "tap any card to learn more" */
+.sectionHint {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  text-transform: none;
+  font-style: italic;
+  margin-left: 4px;
+}
+
+/* ── Skeleton placeholder for charts while Recharts lazy-loads ── */
+.chartsFallback { width: 100%; }
+
+.chartSkeleton {
+  padding: 20px;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.sectionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Stat card grids ── */
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ── Hourly charts grid ── */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .chartsGrid { grid-template-columns: 1fr; }
+  .grid4 { grid-template-columns: repeat(2, 1fr); }
+  .hero { flex-direction: column; align-items: flex-start; }
+  .heroRight { flex-direction: row; align-items: center; }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 16px 14px; gap: 24px; }
+  .pageTitle { font-size: 22px; }
+  .grid2 { grid-template-columns: 1fr; }
+  .grid3 { grid-template-columns: repeat(2, 1fr); }
+  .grid4 { grid-template-columns: 1fr 1fr; }
+  .chartsGrid { grid-template-columns: 1fr; }
+  .hero { padding: 20px; }
+  .heroTempValue { font-size: 52px; }
+}

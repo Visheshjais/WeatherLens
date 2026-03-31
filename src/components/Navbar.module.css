@@ -1,0 +1,331 @@
+/* =============================================
+   Navbar.module.css
+   Styles for the sticky top navigation bar.
+   Uses CSS variables so dark/light theme works
+   automatically — no JS needed in CSS.
+   ============================================= */
+
+/* ── Main nav shell ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 20px;
+  background: var(--bg-nav);          /* semi-transparent, defined per theme */
+  backdrop-filter: blur(16px);        /* frosted glass effect */
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  gap: 14px;
+}
+
+/* ── Brand ── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;         /* never compress */
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 20px;
+  color: var(--accent-blue);
+  line-height: 1;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+/* ── Page navigation pills ── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--bg-base);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.link {
+  padding: 5px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+/* Active page = filled blue pill */
+.active {
+  background: var(--accent-blue) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600;
+}
+
+/* ── Right controls ── */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* ══════════════════════════════════════
+   LOCATION SEARCH
+   ══════════════════════════════════════ */
+.searchWrap {
+  position: relative;   /* dropdown is absolutely positioned relative to this */
+  flex: 1;
+  max-width: 260px;
+}
+
+/* Input row */
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: 10px;
+  padding: 0 10px;
+  height: 36px;
+}
+
+/* Glow focus ring */
+.searchBox:focus-within {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-input);
+}
+
+.searchIcon {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Spinning state while API fetches */
+.spin { animation: spin 0.6s linear infinite; }
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.searchInput::placeholder { color: var(--text-muted); }
+
+/* Clear × button */
+.clearBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.clearBtn:hover { color: var(--accent-rose); }
+
+/* ── Results dropdown ── */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);  /* just below the input */
+  left: 0;
+  right: 0;
+  background: var(--bg-dropdown);
+  border: 1px solid var(--border-dropdown);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  overflow: hidden;
+  z-index: 300;
+  animation: fadeUp 0.18s ease forwards;
+}
+
+/* Each city result row */
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.resultItem:hover {
+  background: var(--bg-dropdown-item-hover);
+}
+
+.resultItem + .resultItem {
+  border-top: 1px solid var(--border);
+}
+
+.resultPin { font-size: 14px; flex-shrink: 0; }
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.resultCity {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resultSub {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Empty results message */
+.noResults {
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════
+   THEME TOGGLE  — pill switch
+   
+   Visual design:
+     [🌙  ●    ]  dark mode  — knob on left
+     [    ● ☀ ]  light mode — knob slides right
+
+   CSS-only animation via transform on .themeKnob
+   .themeLight class is toggled by JS (from ThemeContext)
+   ══════════════════════════════════════ */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--theme-btn-bg);
+  border: 1px solid var(--theme-btn-border);
+  border-radius: 99px;
+  padding: 5px 10px 5px 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.themeToggle:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(99,179,237,0.12);
+}
+
+/* The pill track */
+.themeTrack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 44px;
+  height: 22px;
+  border-radius: 99px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-accent);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Moon icon on left side of track */
+.trackIconLeft {
+  position: absolute;
+  left: 4px;
+  font-size: 11px;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* Sun icon on right side of track */
+.trackIconRight {
+  position: absolute;
+  right: 4px;
+  font-size: 11px;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* Sliding knob */
+.themeKnob {
+  position: absolute;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.3s ease;
+  z-index: 2;
+}
+
+/* When light mode: knob slides to the right */
+.themeLight .themeKnob {
+  transform: translateX(22px);
+  background: var(--accent-amber);
+}
+
+/* Text label */
+.themeLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--theme-btn-color);
+  letter-spacing: 0.03em;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Hide brand text, keep logo */
+  .brandName { display: none; }
+  /* Shrink search */
+  .searchWrap { max-width: 160px; }
+  /* Hide theme text label */
+  .themeLabel { display: none; }
+  .themeToggle { padding: 5px 6px; }
+}
+
+@media (max-width: 500px) {
+  .nav { padding: 0 12px; gap: 8px; }
+  .links { display: none; } /* hide nav on very small screens */
+  .searchWrap { max-width: 140px; }
+}
