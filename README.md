@@ -7,7 +7,7 @@ Integrates with the **Open-Meteo API** for real-time, hourly, and historical wea
 
 ## 🚀 Live Demo
 
-🔗 **[https://weather-lens.vercel.app](https://weather-lens.vercel.app)**
+🔗 **[https://weather-lens.vercel.app]([https://weather-lens.vercel.app](https://weather-lens-omega.vercel.app/))**
 
 > Deployed on Vercel — loads globally in under 500ms.
 
@@ -112,6 +112,7 @@ These features were added by myself to improve the user experience and demonstra
 | Layer | Tool | Version |
 |---|---|---|
 | Framework | React | 18 |
+| Styling | CSS3 (with CSS Modules) | — |
 | Build Tool | Vite | 5 |
 | Routing | React Router | v6 |
 | Charts | Recharts | 2.x |
@@ -274,7 +275,23 @@ npm run build
 
 ---
 
-## 👤 Author
 
-Built for the Junior ReactJS Frontend Developer selection test at **The Lattice**.  
-Contact: hr@thelattice.in
+## 📜 License
+
+MIT License © 2025 Vishesh Jaiswal
+
+---
+
+## 👨‍💻 Author
+
+**Vishesh Jaiswal**
+- GitHub: [@Visheshjais](https://github.com/Visheshjais)
+
+---
+
+<div align="center">
+
+Made with ❤️ and lots of music by **Vishesh Jaiswal**
+
+⭐ Star this repo if you liked it!
+</div>
