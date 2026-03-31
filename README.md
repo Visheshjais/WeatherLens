@@ -1,18 +1,21 @@
-# 🌦 WeatherLens — Live Weather Dashboard
+<div align="center">
 
-A responsive React weather dashboard built for the **Junior Frontend Developer Selection Test** at The Lattice.  
-Integrates with the **Open-Meteo API** for real-time, hourly, and historical weather data with automatic GPS-based location detection.
+# 🌦 WeatherLens
+### A Modern Real-Time Weather Dashboard
 
----
+![WeatherLens](https://img.shields.io/badge/WeatherLens-Weather%20Dashboard-4A90E2?style=for-the-badge&logo=cloud&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![API](https://img.shields.io/badge/API-Open--Meteo-FF9800?style=for-the-badge&logo=cloud&logoColor=white)
+![Charts](https://img.shields.io/badge/Charts-Recharts-8884d8?style=for-the-badge)
+![Date](https://img.shields.io/badge/Date-date--fns-6C63FF?style=for-the-badge)
+![Vercel](https://img.shields.io/badge/Hosted-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-## 🚀 Live Demo
+**Real-time weather insights · GPS-based location · Interactive charts**
 
-🔗 **[https://weather-lens.vercel.app]([https://weather-lens.vercel.app](https://weather-lens-omega.vercel.app/))**
+[🌐 Live Demo](https://weather-lens-omega.vercel.app/) 
 
-> Deployed on Vercel — loads globally in under 500ms.
-
----
-
+</div>
 ## ✨ Core Features (As Per Requirements)
 
 ### 📍 Page 1 — Current Weather & Hourly Forecast
