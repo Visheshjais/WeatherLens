@@ -294,7 +294,7 @@ MIT License © 2025 Vishesh Jaiswal
 
 <div align="center">
 
-Made with ❤️ and lots of music by **Vishesh Jaiswal**
+Made with ❤️ by **Vishesh Jaiswal**
 
 ⭐ Star this repo if you liked it!
 </div>
